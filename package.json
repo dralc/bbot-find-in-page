@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "micro-dev --silent",
     "start": "micro index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +22,6 @@
     "micro": "^9.0.0"
   },
   "devDependencies": {
-    "yahoo-weather": "^2.2.2"
+    "micro-dev": "^1.2.3"
   }
 }
