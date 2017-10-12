@@ -1,0 +1,27 @@
+{
+  "name": "bbot-findinpage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "micro-dev --silent",
+    "start": "micro index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/dralc/bbot-findinpage.git"
+  },
+  "keywords": [
+    "bot"
+  ],
+  "author": "Aloysius Chan",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/dralc/bbot-findinpage#readme",
+  "dependencies": {
+    "micro": "^9.0.0"
+  },
+  "devDependencies": {
+    "micro-dev": "^1.2.3"
+  }
+}
