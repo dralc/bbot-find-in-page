@@ -1,44 +1,38 @@
 const url = require('url');
 const fetch = require('node-fetch');
 
-const app = Object.create(null, {
-    markup: {
-        value: (text) => {
-            return `<span style="background-color: #FFE700;">${text}</span>`;
-        }
-    },
+const app = Object.create(null);
 
-    /**
-     * Mark up all occurences of `findMe` in `pile`
-     */
-    highlight: {
-        value: (findMe, pile) => {
-            const markup = app.markup(findMe);
-            const re = new RegExp(findMe, 'g');
+app.markup = (text) => {
+    return `<span style="background-color: #FFE700;">${text}</span>`;
+};
 
-            return pile.replace(re, markup);
-        }
-    },
+/**
+ * Mark up all occurences of `findMe` in `pile`
+ */
+app.highlight = (findMe, pile) => {
+    const markup = app.markup(findMe);
+    const re = new RegExp(findMe, 'g');
 
-    /**
-     * Requests a document
-     * Marks up keywords
-     * Outputs the re-written document
-     */
-    run: {
-        value: async (req, res) => {
-            let out;
+    return pile.replace(re, markup);
+};
 
-            // request pg
-            const query = url.parse(req.url, true).query;
-            const pg = await fetch(query.pg);
+/**
+ * Requests a document
+ * Marks up keywords
+ * Outputs the re-written document
+ */
+app.run = async (req, res) => {
+    let out;
 
-            out = app.highlight(query.q, await pg.text());
+    // request pg
+    const query = url.parse(req.url, true).query;
+    const pg = await fetch(query.pg);
 
-            res.setHeader('content-type', 'text/html');
-            res.end(out);
-        }
-    }
-});
+    out = app.highlight(query.q, await pg.text());
+
+    res.setHeader('content-type', 'text/html');
+    res.end(out);
+};
 
 module.exports = app;
