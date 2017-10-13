@@ -23,13 +23,15 @@ app.highlight = (findMe, pile) => {
  * Outputs the re-written document
  */
 app.run = async (req, res) => {
-    let out;
+    let out, pg;
 
     // request pg
     const query = url.parse(req.url, true).query;
-    const pg = await fetch(query.pg);
+    const queryAdapter = require('./adapters/' + (query.adapter || 'browser'));
+    const params = queryAdapter(query);
 
-    out = app.highlight(query.q, await pg.text());
+    pg = await fetch(params.pg);
+    out = app.highlight(params.q, await pg.text());
 
     res.setHeader('content-type', 'text/html');
     res.end(out);
