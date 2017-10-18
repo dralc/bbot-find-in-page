@@ -8,6 +8,12 @@
     "start": "micro index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "now": {
+    "alias": "bbot-findinpage",
+    "env": {
+      "NODE_ENV": "production"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/dralc/bbot-findinpage.git"
